@@ -42,14 +42,14 @@ class User extends Authenticatable
         return $this->hasMany(Micropost::class);
     }
     
-    public function following()
+    public function followings()
     {
-        return $this->belongsTo(User::class, 'user_follow' , 'user_id' , 'follow_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'user_follow' , 'user_id' , 'follow_id')->withTimestamps();
     }
     
     public function follower()
     {
-        return $this->belongsTo(User::class, 'user_follow' , 'follow_id' , 'user_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'user_follow' , 'follow_id' , 'user_id')->withTimestamps();
     }
     
     public function loadRelationshipCounts()
