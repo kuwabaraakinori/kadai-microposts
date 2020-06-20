@@ -19,6 +19,7 @@ class MicropostsController extends Controller
                 'user' => $user,
                 'microposts' => $microposts,
             ];
+           
         }
 
         // Welcomeビューでそれらを表示
