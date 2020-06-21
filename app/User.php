@@ -52,6 +52,12 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'user_follow' , 'follow_id' , 'user_id')->withTimestamps();
     }
     
+     public function favorites()
+    {
+        return $this->belongsToMany(User::class, 'favorites', 'user_id' , 'micropost_id' )->withTimestamps();
+    }
+
+    
     public function loadRelationshipCounts()
     {
         $this->loadCount(['microposts', 'followings', 'follower' , 'favorites']);
@@ -107,9 +113,14 @@ class User extends Authenticatable
         return Micropost::whereIn('user_id', $userIds);
     }
     
-    public function favorites()
+    public function favorite()
     {
-        return $this->belongsToMany(User::class, 'favorites', 'user_id' , 'micropost_id' )->withTimestamps();
+        
     }
-
+    
+    public function unfavorite()
+    {
+        
+    }
+   
 }

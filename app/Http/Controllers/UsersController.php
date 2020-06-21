@@ -21,10 +21,13 @@ class UsersController extends Controller
     {
         // idの値でユーザを検索して取得
         $user = User::findOrFail($id);
+        
+        $microposts = $user->feed_microposts()->orderBy('created_at', 'desc')->paginate(10);
 
         // ユーザ詳細ビューでそれを表示
         return view('users.show', [
             'user' => $user,
+            'microposts' => $microposts,
         ]);
     }
     
