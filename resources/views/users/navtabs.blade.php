@@ -17,12 +17,12 @@
     <li class="nav-item">
         <a href="{{ route('users.followers', ['id' => $user->id]) }}" class="nav-link {{ Request::routeIs('users.followers') ? 'active' : '' }}">
             Followers
-            <span class="badge badge-secondary">{{ $user->followers_count }}</span>
+            <span class="badge badge-secondary">{{ $user->follower_count }}</span>
         </a>
     </li>
     {{-- お気に入り一覧タブ--}}
     <li class="nav-item">
-        <a href="{{ route('favorites.favorite' , ['id' => $user->id]) }}" class="nav-link {{ Request::routeIs('favorites.favorite') ? 'active' : '' }}">
+        <a href="{{ route('users.favorites' , ['id' => $user->id]) }}" class="nav-link {{ Request::routeIs('users.favorites') ? 'active' : '' }}">
             Favorites
             <span class="badge badge-secondary">{{ $user->favorites_count }}</span>
         </a>

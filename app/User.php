@@ -113,14 +113,36 @@ class User extends Authenticatable
         return Micropost::whereIn('user_id', $userIds);
     }
     
-    public function favorite()
+    public function favorite($micropost)
     {
+        $exist = $this->is_favoriting($micropost);
+        $its_me = $this->id == $micropost;
+        
+        //dd($exist);
+        if($exist || !$its_me){
+            return false;
+        }else{
+            $this->favorites()->attach($micropost);
+            return true;
+        }
         
     }
     
-    public function unfavorite()
+    public function unfavorite($micropost)
     {
-        
+        $exist = $this->is_favoriting($micropost);
+        $its_me = $this->id == $micropost;
+        if($exist && $its_me){
+            $this->favorites()->detach($micropost);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public function is_favoriting($micropost)
+    {
+        return  $this->favorites()->where('micropost_id' , $micropost)->exists();
     }
    
 }

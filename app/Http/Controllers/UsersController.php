@@ -66,14 +66,17 @@ class UsersController extends Controller
             'users' => $followers,
         ]);
     }
-    public function favorite($id)
+    public function favorites($id)
     {
-        $user=User::findorFail($id);
+        $user = User::findorFail($id);
         
         $user->loadRelationshipCounts();
         
+        $favorite = $user->favorites()->paginate(10); 
+        
         return view('users.favorites' , [
             'user'=>$user,
+            'microposts'=>$favorite,
         ]);
         
     }

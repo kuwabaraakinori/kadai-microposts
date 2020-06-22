@@ -8,14 +8,14 @@ class FavoritesController extends Controller
 {
     public function store($id)
     {
-        \Auth::micropost()->favorite($micropost_id);
+        \Auth::user()->favorite($id);
         
         return back();
     }
     
     public function destroy($id)
     {
-        \Auth::micropost()->unfavorite($micropost_id);
+        \Auth::user()->unfavorite($id);
         
         return back();
     }
